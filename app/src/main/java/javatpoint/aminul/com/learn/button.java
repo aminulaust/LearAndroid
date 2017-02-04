@@ -28,6 +28,7 @@ public class button extends Fragment {
          rootView= inflater.inflate(R.layout.button,container, false);
 
         registerViews();
+        // date 04 Janulary 2017
        /*
         final EditText edittext1=(EditText)rootView.findViewById(R.id.editText1);
         final  EditText edittext2=(EditText)rootView.findViewById(R.id.editText2);
