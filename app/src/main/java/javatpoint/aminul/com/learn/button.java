@@ -28,7 +28,7 @@ public class button extends Fragment {
          rootView= inflater.inflate(R.layout.button,container, false);
 
         registerViews();
-        // date 04 Janulary 2017
+        // date 04 Janulary 2017 upload to git
        /*
         final EditText edittext1=(EditText)rootView.findViewById(R.id.editText1);
         final  EditText edittext2=(EditText)rootView.findViewById(R.id.editText2);
@@ -130,6 +130,6 @@ public class button extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Button");
+        getActivity().setTitle("From Validation");
     }
 }
