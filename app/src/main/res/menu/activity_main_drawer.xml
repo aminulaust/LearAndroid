@@ -18,6 +18,10 @@
             android:id="@+id/nav_tbutton"
             android:icon="@mipmap/ic_launcher"
             android:title="User Interface" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Map" />
     </group>
 
 
