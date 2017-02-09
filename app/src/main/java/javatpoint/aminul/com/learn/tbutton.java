@@ -20,6 +20,6 @@ public class tbutton extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("ToggleButton");
+        getActivity().setTitle("User Interface");
     }
 }

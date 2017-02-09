@@ -23,24 +23,49 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 public class ctoast extends Fragment {
-
+    private static boolean wifiConnected = false;
+    private static boolean mobileConnected = false;
     private String TAG = ctoast.class.getSimpleName();
     private ListView lv;
     private View rootView;
-
     ArrayList<HashMap<String, String>> contactList;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         rootView= inflater.inflate(R.layout.ctoast,container, false);
-
         contactList = new ArrayList<>();
         lv = (ListView)rootView.findViewById(R.id.list);
+        checkNetworkConnection();
+       // new GetContacts().execute();
+        return rootView;
 
-        new GetContacts().execute();
-       return rootView;
+    }
+    private void checkNetworkConnection() {
+        ConnectivityManager connMgr =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+        if (activeInfo != null && activeInfo.isConnected()) {
+            wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
+            mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+            if(wifiConnected) {
+                //Log.i(TAG, getString(R.string.wifi_connection));
+                Toast.makeText(getActivity().getApplicationContext(),"wifi_connection",Toast.LENGTH_LONG).show();
+                new GetContacts().execute();
+            } else if (mobileConnected){
+              //  Log.i(TAG, getString(R.string.mobile_connection));
+                Toast.makeText(getActivity().getApplicationContext(),"mobile_connection",Toast.LENGTH_LONG).show();
+                new GetContacts().execute();
+            }
+        } else {
+            //Log.i(TAG, getString(R.string.no_wifi_or_mobile));
+            Toast.makeText(getActivity().getApplicationContext(),"no_wifi_or_mobile",Toast.LENGTH_LONG).show();
+        }
     }
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {
@@ -139,5 +164,7 @@ public class ctoast extends Fragment {
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Android - JSON Parser");
     }
+
+
 }
 
