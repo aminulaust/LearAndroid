@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.pm.PackageManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,20 +44,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         checkAndRequestPermissions();
 
     }
-    private  boolean checkAndRequestPermissions() {
+
+    private boolean checkAndRequestPermissions() {
 
         int locationPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
-        int cameraPermission= ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA);
+        int cameraPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
         if (locationPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
         }
-        if (cameraPermission!= PackageManager.PERMISSION_GRANTED) {
+        if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(android.Manifest.permission.CAMERA);
         }
         if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),REQUEST_ID_MULTIPLE_PERMISSIONS);
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
             return false;
         }
         return true;
