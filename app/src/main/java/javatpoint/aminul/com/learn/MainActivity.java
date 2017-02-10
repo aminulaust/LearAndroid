@@ -1,5 +1,7 @@
 package javatpoint.aminul.com.learn;
 
+import android.*;
+import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,9 +46,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private  boolean checkAndRequestPermissions() {
 
         int locationPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
+        int cameraPermission= ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA);
+
         List<String> listPermissionsNeeded = new ArrayList<>();
         if (locationPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (cameraPermission!= PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.CAMERA);
         }
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),REQUEST_ID_MULTIPLE_PERMISSIONS);
@@ -108,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_map:
                 fragment = new MapsActivity();
+                break;
+            case R.id.nav_camera:
+                fragment = new CameraActivity();
                 break;
 
 
