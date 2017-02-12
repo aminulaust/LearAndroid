@@ -26,6 +26,10 @@
             android:id="@+id/nav_camera"
             android:icon="@mipmap/ic_launcher"
             android:title="Camera" />
+        <item
+            android:id="@+id/nav_facebook"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Facebook" />
     </group>
 
 

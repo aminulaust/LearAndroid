@@ -19,9 +19,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
+import android.content.pm.Signature;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.util.Log;
+import android.util.Base64;
+
 
 import java.util.ArrayList;
 import java.util.List;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
@@ -30,6 +38,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //***
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "javatpoint.aminul.com.learn",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+        //******
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -121,8 +148,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_camera:
                 fragment = new CameraActivity();
                 break;
-
-
+            case R.id.nav_facebook:
+                fragment = new FacebookActivity();
+                break;
         }
 
         //replacing the fragment
